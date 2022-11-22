@@ -52,7 +52,7 @@ class NavBar extends React.Component{
                             </a>
                             <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 <li><a className="dropdown-item" href="/">Dashboard</a></li>
-                                <li><a className="dropdown-item" href={this.user_link}>Profile</a></li>
+                                <li><a className="dropdown-item" href="/profile">Profile</a></li>
                                 <li><hr className="dropdown-divider" /></li>
                                 <li><button onClick={this.Logout} className="dropdown-item" type="button">Logout</button></li>
                             </ul>
