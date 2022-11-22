@@ -7,38 +7,20 @@ import Signup from './components/signup.component';
 import React from 'react';
 import Profile from './components/profile.component';
 import EditProfile from './components/editProfile.component';
+import { connect } from 'react-redux';
+import * as actions from './store/actions/auth';
 
-class Main extends React.Component{
-  constructor(props) {
-    super(props);
-    this.state = JSON.parse(window.localStorage.getItem('state')) || {
-      logged_in: "true", username: "test_user"
-    }
-    this.LogoutUser = this.LogoutUser.bind(this);
-    this.LoginUser = this.LoginUser.bind(this);
+class App extends React.Component{
+  componentDidMount() {
+    this.props.onTryAutoSignup();
   }
-  
-  setState(state) {
-    window.localStorage.setItem('state', JSON.stringify(state));
-    super.setState(state);
-  }
-  
-  LogoutUser(){
-    this.setState({
-      logged_in: "false"
-    });
-  }
-  LoginUser(){
-    this.setState({
-      logged_in: "true",
-    });
-  }
+
   render(){
     return(
       <Router>
-        <NavBar logged_in={this.state.logged_in} username={this.state.username} navCallBack={this.LogoutUser}/>
+        <NavBar {...this.props}/>
         <Routes>
-          <Route path="/login" element={<Login  loginCallBack = {this.LoginUser}/>}/>
+          <Route path="/login" element={<Login />}/>
           <Route path="/signup" element={<Signup/>} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/edit-profile" element={<EditProfile />} />
@@ -48,10 +30,16 @@ class Main extends React.Component{
   }
 }
 
-function App() {
-  return (
-    <Main />
-  );
+const mapStateToProps = state => {
+  return {
+    isAuthenticated: state.token !== null
+  }
 }
 
-export default App;
+const mapDispatchToProps = dispatch => {
+  return {
+    onTryAutoSignup: () => dispatch(actions.authCheckState())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

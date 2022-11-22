@@ -1,14 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 class NavBar extends React.Component{
-    constructor(props) {
-        super(props);
-        this.state = {logged_in: this.props.logged_in, username: this.props.username};
-        this.Logout = this.Logout.bind(this);
-    }
-    Logout(){
-        this.props.navCallBack();
-    }
     componentDidUpdate(prevProps){
         if(prevProps.logged_in !== this.props.logged_in) {
             this.setState({logged_in: this.props.logged_in});
@@ -41,9 +33,9 @@ class NavBar extends React.Component{
                     <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
                     <button className="btn btn-outline-success" type="submit" id="search-button-navbar">Search</button>
                 </form>
-                {this.state.logged_in==="false" && <Link to="/login" className=" btn btn-outline-success">Log In</Link>}
-                {this.state.logged_in==="false" && <Link to="/signup" className="btn btn-outline-success">Sign Up</Link>}
-                {this.state.logged_in==="true" &&
+                {!this.props.isAuthenticated && <Link to="/login" className=" btn btn-outline-success">Log In</Link>}
+                {!this.props.isAuthenticated && <Link to="/signup" className="btn btn-outline-success">Sign Up</Link>}
+                {this.props.isAuthenticated &&
                     <div className="nav-item dropdown">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             <li className="nav-item dropdown">
@@ -54,7 +46,7 @@ class NavBar extends React.Component{
                                 <li><a className="dropdown-item" href="/">Dashboard</a></li>
                                 <li><a className="dropdown-item" href="/profile">Profile</a></li>
                                 <li><hr className="dropdown-divider" /></li>
-                                <li><button onClick={this.Logout} className="dropdown-item" type="button">Logout</button></li>
+                                <li><button className="dropdown-item" type="button">Logout</button></li>
                             </ul>
                             </li>
                         </ul>
