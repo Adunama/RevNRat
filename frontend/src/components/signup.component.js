@@ -4,14 +4,6 @@ import { Navigate } from "react-router-dom";
 import * as actions from '../store/actions/auth';
 class Signup extends React.Component {
     state = {}
-
-    componentDidMount(){
-        this.setState({
-            signed: false,
-            error: null
-        })
-    }
-
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.onAuth(
@@ -20,12 +12,6 @@ class Signup extends React.Component {
             this.state.password,
             this.state.confirm
         );
-        setTimeout(() => {
-            this.setState({error: this.props.error})
-        }, 1000);
-        if(this.state.error === null){
-            this.setState({signed: true})
-        } 
     }
 
     compareToFirstPassword = () => {
@@ -41,8 +27,8 @@ class Signup extends React.Component {
         return(
             <div>
             <div className = "row justify-content-center">
-                    {this.state.error && <h5 style={{textAlign: "center"}}>{this.state.error.message}<br />Try Again!</h5>}
-                    {this.state.signed && <Navigate to="/" replace={true} />}
+                    {this.props.error && <h5 style={{textAlign: "center"}}>Request Failed! <br /> Try another Username or check Email<br />Try Again!</h5>}
+                    {this.props.token !== null && <Navigate to="/" replace={true} />}
                 </div>
             <div className="align-items-stretch d-flex bg-light" style={{minHeight: "100vh"}}>
                 <div className="container-fluid">
@@ -86,7 +72,8 @@ class Signup extends React.Component {
 }
 const mapStateToProps = (state) => {
     return {
-        error: state.error
+        error: state.error,
+        token: state.token
     }
 }
 

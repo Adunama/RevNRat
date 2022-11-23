@@ -19,7 +19,7 @@ class App extends React.Component{
   render(){
     return(
       <Router>
-        <NavBar {...this.props}/>
+        <NavBar />
         <Routes>
           <Route path="/" element={<Dashboard />}/>
           <Route path="/login" element={<Login />}/>

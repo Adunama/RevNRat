@@ -5,14 +5,14 @@ import InfiniteScroll from "react-infinite-scroller";
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 function Profile(props){
-    const [userName, setUserName] = useState({username: "test"});
-    const [email, setEmail] = useState({email: "test@email.com"});
-    const [firstName, setFirstName] = useState({username: "Name"});
-    axios.get(`http://127.0.0.1:8000/user/${props.token}`)
+    const [userName, setUserName] = useState("test");
+    const [email, setEmail] = useState("test@email.com");
+    const [name, setName] = useState("Name");
+    axios.get(`http://127.0.0.1:8000/user/${props.token}/`)
     .then(res => {
-        setUserName(res.username);
-        setFirstName(res.firstName);
-        setEmail(res.email);
+        setUserName(res.data.username);
+        setName(res.data.fullname);
+        setEmail(res.data.email);
     })
 
     const reviews = new Array(17).fill().map(() => ({
@@ -106,7 +106,7 @@ function Profile(props){
                             <div className="col-sm-3">
                                 <h6 className="mb-0">Full Name</h6>
                             </div>
-                            <div className="col"> {firstName} </div>
+                            <div className="col"> {name} </div>
                             <div className="col d-flex justify-content-end">
                             <Link className="btn btn-primary" to="/edit-profile">Edit Details</Link>
                             </div>
