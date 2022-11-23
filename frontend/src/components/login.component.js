@@ -1,16 +1,31 @@
 import React from 'react';
+import { Navigate } from "react-router-dom";
 import { connect } from 'react-redux';
 import * as actions from '../store/actions/auth';
 
 class Login extends React.Component {
+    state = {}
+    componentDidMount(){
+        this.setState({
+            logged_in: false,
+        })
+    }
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log(this.props);
-        console.log(this.state);
-        this.props.onAuth(this.state.username, this.state.password);
+        this.props.onAuth(this.state.username, this.state.password)
+        setTimeout(() => { if(this.props.error === null){
+            this.setState({logged_in: true})
+        } }, 1000); 
+        
     }
     render(){
         return(
+            <div>
+                <div className = "row justify-content-center">
+                    {this.props.error && <h5 style={{textAlign: "center"}}>{this.props.error.message}</h5>}
+                    Try Again!
+                    {this.state.logged_in && <Navigate to="/" replace={true} />}
+                </div>
             <div className="align-items-stretch d-flex bg-light" style={{minHeight: "100vh"}}>
                 <div className="container-fluid">
                 <div className="row justify-content-center align-items-stretch d-flex-row text-center h-100" style={{marginTop: "15vh"}}>
@@ -37,6 +52,7 @@ class Login extends React.Component {
                     </div>
                 </div>
                 </div>
+            </div>
             </div>
         );
     };

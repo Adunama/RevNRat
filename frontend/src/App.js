@@ -20,6 +20,7 @@ class App extends React.Component{
       <Router>
         <NavBar {...this.props}/>
         <Routes>
+          <Route path="/" element={<div />}/>
           <Route path="/login" element={<Login />}/>
           <Route path="/signup" element={<Signup/>} />
           <Route path="/profile" element={<Profile />} />
