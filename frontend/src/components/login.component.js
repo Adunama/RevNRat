@@ -4,29 +4,16 @@ import { connect } from 'react-redux';
 import * as actions from '../store/actions/auth';
 
 class Login extends React.Component {
-    state = {}
-    componentDidMount(){
-        this.setState({
-            logged_in: false,
-            error: null
-        })
-    }
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.onAuth(this.state.username, this.state.password)
-        setTimeout(() => {
-            this.setState({error: this.props.error})
-        }, 1000);
-        if(this.state.error === null){
-            this.setState({logged_in: true})
-        }
     }
     render(){
         return(
             <div>
                 <div className = "row justify-content-center">
-                    {this.state.error && <h5 style={{textAlign: "center"}}>{this.state.error.message}<br />Try Again!</h5>}
-                    {this.state.logged_in && <Navigate to="/" replace={true} />}
+                    {this.props.error && <h5 style={{textAlign: "center"}}>Invalid Username or Password<br />Try Again!</h5>}
+                    {this.props.token !== null && <Navigate to="/" replace={true} />}
                 </div>
             <div className="align-items-stretch d-flex bg-light" style={{minHeight: "100vh"}}>
                 <div className="container-fluid">
@@ -62,6 +49,7 @@ class Login extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
+        token: state.token,
         error: state.error
     }
 }

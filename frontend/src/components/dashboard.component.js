@@ -5,7 +5,7 @@ class Dashboard extends React.Component{
         return(
             <div>
                 <div className="row">
-                    <div className="col-12 col-md-6" style={{backgroundColor: `url(${background})`}}>
+                    <div className="col-12 col-md-6" style={{backgroundImage: `url(${background})`, minHeight: "80vh"}}>
                         
                     </div>
                 </div>

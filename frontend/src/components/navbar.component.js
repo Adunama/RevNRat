@@ -5,16 +5,18 @@ import * as actions from '../store/actions/auth';
 import axios from 'axios';
 class NavBar extends React.Component{
     state = {
-        username: 'test'
+        username: ''
     }
     getUserInfo(){
-        axios.get(`http://127.0.0.1:8000/user/${this.props.token}`)
+        axios.get(`http://127.0.0.1:8000/user/${this.props.token}/`)
         .then(res => {
-            this.setState({username: res.username})
+            this.setState({username: res.data.username})
         })
     }
-    componentDidMount() {
-        this.getUserInfo();
+    componentDidUpdate(prevProps) {
+        if(prevProps.token !== this.props.token){
+            this.getUserInfo();
+        }
     }
     render(){
         return(
@@ -66,10 +68,17 @@ class NavBar extends React.Component{
     }
 }
 
+const mapStateToProps = state => {
+    return {
+        token: state.token,
+        isAuthenticated: state.token !== null
+    }
+}
+
 const mapDispatchToProps = dispatch => {
     return {
         logout: () => dispatch(actions.logout()) 
     }
 }
 
-export default connect(null, mapDispatchToProps)(NavBar);
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
