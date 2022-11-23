@@ -8,10 +8,13 @@ class NavBar extends React.Component{
         username: 'test'
     }
     getUserInfo(){
-        axios.get(`http://127.0.0.1:8000/api/${this.props.token}`)
+        axios.get(`http://127.0.0.1:8000/user/${this.props.token}`)
         .then(res => {
             this.setState({username: res.username})
         })
+    }
+    componentDidMount() {
+        this.getUserInfo();
     }
     render(){
         return(

@@ -5,10 +5,10 @@ import InfiniteScroll from "react-infinite-scroller";
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 function Profile(props){
-    const [userData, setUserData] = useState({username: "test"});
-    axios.get(`http://127.0.0.1:8000/api/${props.token}`)
+    const [userName, setUserName] = useState({username: "test"});
+    axios.get(`http://127.0.0.1:8000/user/${props.token}`)
     .then(res => {
-        setUserData(res)
+        setUserName(res.username)
     })
 
     const reviews = new Array(17).fill().map(() => ({
