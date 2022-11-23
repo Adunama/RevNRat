@@ -92,7 +92,7 @@ function Profile(props){
                         <div className="d-flex flex-column align-items-center text-center">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Hubble_ultra_deep_field.jpg" alt="User" className="rounded-circle" width="150"/>
                             <div className="mt-4">
-                                <h4>{userData.username}</h4>
+                                <h4>{userName}</h4>
                                 <p className="text-secondary mb-1">Intro</p>
                             </div>
                         </div>
