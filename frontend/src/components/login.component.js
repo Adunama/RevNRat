@@ -8,22 +8,24 @@ class Login extends React.Component {
     componentDidMount(){
         this.setState({
             logged_in: false,
+            error: null
         })
     }
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.onAuth(this.state.username, this.state.password)
-        setTimeout(() => { if(this.props.error === null){
+        setTimeout(() => {
+            this.setState({error: this.props.error})
+        }, 1000);
+        if(this.state.error === null){
             this.setState({logged_in: true})
-        } }, 1000); 
-        
+        }
     }
     render(){
         return(
             <div>
                 <div className = "row justify-content-center">
-                    {this.props.error && <h5 style={{textAlign: "center"}}>{this.props.error.message}</h5>}
-                    Try Again!
+                    {this.state.error && <h5 style={{textAlign: "center"}}>{this.state.error.message}<br />Try Again!</h5>}
                     {this.state.logged_in && <Navigate to="/" replace={true} />}
                 </div>
             <div className="align-items-stretch d-flex bg-light" style={{minHeight: "100vh"}}>

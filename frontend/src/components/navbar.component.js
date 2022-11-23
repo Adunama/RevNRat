@@ -2,7 +2,17 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../store/actions/auth';
+import axios from 'axios';
 class NavBar extends React.Component{
+    state = {
+        username: 'test'
+    }
+    getUserInfo(){
+        axios.get(`http://127.0.0.1:8000/api/${this.props.token}`)
+        .then(res => {
+            this.setState({username: res.username})
+        })
+    }
     render(){
         return(
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -34,13 +44,13 @@ class NavBar extends React.Component{
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             <li className="nav-item dropdown">
                             <a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                test_user
+                                {this.state.username}
                             </a>
                             <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 <li><a className="dropdown-item" href="/">Dashboard</a></li>
                                 <li><a className="dropdown-item" href="/profile">Profile</a></li>
                                 <li><hr className="dropdown-divider" /></li>
-                                <li><button className="dropdown-item" type="button" onClick={this.props.logout}>Logout</button></li>
+                                <li><button className="dropdown-item" onClick={this.props.logout} type="submit" > <a className="dropdown-item" href="/">Logout</a></button></li>
                             </ul>
                             </li>
                         </ul>

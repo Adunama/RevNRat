@@ -3,7 +3,14 @@ import filled_star from '../photos/filled_star.png';
 import empty_star from '../photos/empty_star.png';
 import InfiniteScroll from "react-infinite-scroller";
 import { Link } from 'react-router-dom';
-function Profile(){
+import axios from 'axios';
+function Profile(props){
+    const [userData, setUserData] = useState({username: "test"});
+    axios.get(`http://127.0.0.1:8000/api/${props.token}`)
+    .then(res => {
+        setUserData(res)
+    })
+
     const reviews = new Array(17).fill().map(() => ({
         author: "Username",
         Rating: 3,
@@ -66,6 +73,11 @@ function Profile(){
             }, 2000);
         }
     };
+    if(!props.isAuthenticated){
+        return(
+            <div>Not Logged In</div>
+        )
+    }
     return(
         <div className="container">
         <div className="main-body">
@@ -76,7 +88,7 @@ function Profile(){
                         <div className="d-flex flex-column align-items-center text-center">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Hubble_ultra_deep_field.jpg" alt="User" className="rounded-circle" width="150"/>
                             <div className="mt-4">
-                                <h4>Username</h4>
+                                <h4>{userData.username}</h4>
                                 <p className="text-secondary mb-1">Intro</p>
                             </div>
                         </div>

@@ -4,11 +4,14 @@ import { Navigate } from "react-router-dom";
 import * as actions from '../store/actions/auth';
 class Signup extends React.Component {
     state = {}
+
     componentDidMount(){
         this.setState({
             signed: false,
+            error: null
         })
     }
+
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.onAuth(
@@ -17,40 +20,29 @@ class Signup extends React.Component {
             this.state.password,
             this.state.confirm
         );
-        setTimeout(() => { if(this.props.error === null){
+        setTimeout(() => {
+            this.setState({error: this.props.error})
+        }, 1000);
+        if(this.state.error === null){
             this.setState({signed: true})
-        } }, 1000); 
+        } 
     }
 
-    // handleConfirmBlur = (e) => {
-    //     const value = e.target.value;
-    //     this.setState({ confirmDirty: this.state.confirmDirty || !!value });
-    // }
-
-    // compareToFirstPassword = (rule, value, callback) => {
-    //     const form = this.props.form;
-    //     if (value && value !== form.getFieldValue('password')) {
-    //         callback('Two passwords that you enter is inconsistent!');
-    //     } else {
-    //         callback();
-    //     }
-    // }
-
-    // validateToNextPassword = (rule, value, callback) => {
-    //     const form = this.props.form;
-    //     if (value && this.state.confirmDirty) {
-    //         form.validateFields(['confirm'], { force: true });
-    //     }
-    //     callback();
-    // }
+    compareToFirstPassword = () => {
+        if (this.state.password !== this.state.confirm) {
+            return (
+                <div style={{color: "red", fontSize: "small"}}>Inconsistent Passwords!</div>
+            )
+        }
+        else return true;
+    }
 
     render(){
         return(
             <div>
             <div className = "row justify-content-center">
-                    {this.props.error && <h5 style={{textAlign: "center"}}>{this.props.error.message}</h5>}
-                    Try Again!
-                    {this.state.logged_in && <Navigate to="/login" replace={true} />}
+                    {this.state.error && <h5 style={{textAlign: "center"}}>{this.state.error.message}<br />Try Again!</h5>}
+                    {this.state.signed && <Navigate to="/" replace={true} />}
                 </div>
             <div className="align-items-stretch d-flex bg-light" style={{minHeight: "100vh"}}>
                 <div className="container-fluid">
@@ -71,6 +63,9 @@ class Signup extends React.Component {
                             </div>
                             <div className="mt-2 mb-2 form-group input-group">
                                 <input name="" type="password" className="form-control" onChange={(e) => this.setState({confirm: e.target.value})} placeholder="Repeat Password"  />
+                            </div>
+                            <div className="mt-2 mb-2">
+                                {this.compareToFirstPassword()}
                             </div>
                             <div className="mt-2 mb-2 form-group">
                                 <button type="submit" className="btn btn-primary btn-block"> Create Account </button>
