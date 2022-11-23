@@ -6,9 +6,13 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 function Profile(props){
     const [userName, setUserName] = useState({username: "test"});
+    const [email, setEmail] = useState({email: "test@email.com"});
+    const [firstName, setFirstName] = useState({username: "Name"});
     axios.get(`http://127.0.0.1:8000/user/${props.token}`)
     .then(res => {
-        setUserName(res.username)
+        setUserName(res.username);
+        setFirstName(res.firstName);
+        setEmail(res.email);
     })
 
     const reviews = new Array(17).fill().map(() => ({
@@ -102,7 +106,7 @@ function Profile(props){
                             <div className="col-sm-3">
                                 <h6 className="mb-0">Full Name</h6>
                             </div>
-                            <div className="col"> Real Name </div>
+                            <div className="col"> {firstName} </div>
                             <div className="col d-flex justify-content-end">
                             <Link className="btn btn-primary" to="/edit-profile">Edit Details</Link>
                             </div>
@@ -112,7 +116,7 @@ function Profile(props){
                             <div className="col-sm-3">
                             <h6 className="mb-0">Email</h6>
                             </div>
-                            <div className="col"> example@example.com </div>
+                            <div className="col"> {email} </div>
                         </div>
                         <hr />
                         <div className="row align-items-center">
