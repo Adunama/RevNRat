@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-j#tw8ceiv&hm7!fs&aem--rbl5x&&f7i-*f#=ii9ina^*&lse7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['justdjango-react-django-app.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
@@ -52,6 +52,18 @@ INSTALLED_APPS = [
 ]
 
 SITE_ID = 1
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.AllowAny',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+}
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:3000', 'http://127.0.0.1:3000'
+)
 
 MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
