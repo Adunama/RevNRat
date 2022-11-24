@@ -1,0 +1,98 @@
+Date : 2022-11-23 22:32:53
+Directory : /home/divyanshsinghal/Documents/IITB_UG/RevNRat
+Total : 52 files,  30761 codes, 80 comments, 197 blanks, all 31038 lines
+
+Languages
++-------------+------------+------------+------------+------------+------------+
+| language    | files      | code       | comment    | blank      | total      |
++-------------+------------+------------+------------+------------+------------+
+| JSON        |          6 |     29,724 |          0 |          5 |     29,729 |
+| JavaScript  |         13 |        687 |          2 |         39 |        728 |
+| Python      |         26 |        255 |         73 |        107 |        435 |
+| Markdown    |          2 |         53 |          0 |         39 |         92 |
+| Django HTML |          2 |         40 |          0 |          4 |         44 |
+| CSS         |          3 |          2 |          5 |          3 |         10 |
++-------------+------------+------------+------------+------------+------------+
+
+Directories
++------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                         | files      | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                            |         52 |     30,761 |         80 |        197 |     31,038 |
+| backend                                                                                                                      |         27 |        258 |         73 |        108 |        439 |
+| backend/RevNRat                                                                                                              |          6 |        122 |         58 |         51 |        231 |
+| backend/login                                                                                                                |          8 |         16 |          4 |         13 |         33 |
+| backend/login/migrations                                                                                                     |          1 |          0 |          0 |          1 |          1 |
+| backend/user                                                                                                                 |         11 |        102 |          8 |         38 |        148 |
+| backend/user/migrations                                                                                                      |          3 |         42 |          2 |         14 |         58 |
+| frontend                                                                                                                     |         24 |     30,488 |          7 |         83 |     30,578 |
+| frontend/build                                                                                                               |          5 |         25 |          7 |          1 |         33 |
+| frontend/build/static                                                                                                        |          2 |          3 |          7 |          0 |         10 |
+| frontend/build/static/css                                                                                                    |          1 |          2 |          5 |          0 |          7 |
+| frontend/build/static/js                                                                                                     |          1 |          1 |          2 |          0 |          3 |
+| frontend/public                                                                                                              |          2 |         47 |          0 |          5 |         52 |
+| frontend/src                                                                                                                 |         14 |        686 |          0 |         42 |        728 |
+| frontend/src/components                                                                                                      |          6 |        499 |          0 |         13 |        512 |
+| frontend/src/store                                                                                                           |          4 |        119 |          0 |         14 |        133 |
+| frontend/src/store/actions                                                                                                   |          2 |         75 |          0 |          7 |         82 |
+| frontend/src/store/reducers                                                                                                  |          1 |         38 |          0 |          7 |         45 |
++------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++------------------------------------------------------------------------------------------------------------------------------+-------------+------------+------------+------------+------------+
+| filename                                                                                                                     | language    | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------------------------------------+-------------+------------+------------+------------+------------+
+| /home/divyanshsinghal/Documents/IITB_UG/RevNRat/README.md                                                                    | Markdown    |         15 |          0 |          6 |         21 |
+| /home/divyanshsinghal/Documents/IITB_UG/RevNRat/backend/RevNRat/__init__.py                                                  | Python      |          0 |          0 |          1 |          1 |
+| /home/divyanshsinghal/Documents/IITB_UG/RevNRat/backend/RevNRat/asgi.py                                                      | Python      |          4 |          8 |          5 |         17 |
+| /home/divyanshsinghal/Documents/IITB_UG/RevNRat/backend/RevNRat/settings.py                                                  | Python      |         99 |         27 |         38 |        164 |
+| /home/divyanshsinghal/Documents/IITB_UG/RevNRat/backend/RevNRat/urls.py                                                      | Python      |         12 |         15 |          1 |         28 |
+| /home/divyanshsinghal/Documents/IITB_UG/RevNRat/backend/RevNRat/views.py                                                     | Python      |          3 |          0 |          1 |          4 |
+| /home/divyanshsinghal/Documents/IITB_UG/RevNRat/backend/RevNRat/wsgi.py                                                      | Python      |          4 |          8 |          5 |         17 |
+| /home/divyanshsinghal/Documents/IITB_UG/RevNRat/backend/login/__init__.py                                                    | Python      |          0 |          0 |          1 |          1 |
+| /home/divyanshsinghal/Documents/IITB_UG/RevNRat/backend/login/admin.py                                                       | Python      |          1 |          1 |          2 |          4 |
+| /home/divyanshsinghal/Documents/IITB_UG/RevNRat/backend/login/apps.py                                                        | Python      |          4 |          0 |          3 |          7 |
+| /home/divyanshsinghal/Documents/IITB_UG/RevNRat/backend/login/migrations/__init__.py                                         | Python      |          0 |          0 |          1 |          1 |
+| /home/divyanshsinghal/Documents/IITB_UG/RevNRat/backend/login/models.py                                                      | Python      |          1 |          1 |          2 |          4 |
+| /home/divyanshsinghal/Documents/IITB_UG/RevNRat/backend/login/tests.py                                                       | Python      |          1 |          1 |          2 |          4 |
+| /home/divyanshsinghal/Documents/IITB_UG/RevNRat/backend/login/urls.py                                                        | Python      |          5 |          0 |          1 |          6 |
+| /home/divyanshsinghal/Documents/IITB_UG/RevNRat/backend/login/views.py                                                       | Python      |          4 |          1 |          1 |          6 |
+| /home/divyanshsinghal/Documents/IITB_UG/RevNRat/backend/manage.py                                                            | Python      |         15 |          3 |          5 |         23 |
+| /home/divyanshsinghal/Documents/IITB_UG/RevNRat/backend/package-lock.json                                                    | JSON        |          3 |          0 |          1 |          4 |
+| /home/divyanshsinghal/Documents/IITB_UG/RevNRat/backend/user/__init__.py                                                     | Python      |          0 |          0 |          1 |          1 |
+| /home/divyanshsinghal/Documents/IITB_UG/RevNRat/backend/user/admin.py                                                        | Python      |          3 |          1 |          2 |          6 |
+| /home/divyanshsinghal/Documents/IITB_UG/RevNRat/backend/user/apps.py                                                         | Python      |          4 |          0 |          3 |          7 |
+| /home/divyanshsinghal/Documents/IITB_UG/RevNRat/backend/user/migrations/0001_initial.py                                      | Python      |         20 |          1 |          7 |         28 |
+| /home/divyanshsinghal/Documents/IITB_UG/RevNRat/backend/user/migrations/0002_alter_profile_age_alter_profile_bio_and_more.py | Python      |         22 |          1 |          6 |         29 |
+| /home/divyanshsinghal/Documents/IITB_UG/RevNRat/backend/user/migrations/__init__.py                                          | Python      |          0 |          0 |          1 |          1 |
+| /home/divyanshsinghal/Documents/IITB_UG/RevNRat/backend/user/models.py                                                       | Python      |         18 |          1 |          6 |         25 |
+| /home/divyanshsinghal/Documents/IITB_UG/RevNRat/backend/user/serializers.py                                                  | Python      |          6 |          0 |          4 |         10 |
+| /home/divyanshsinghal/Documents/IITB_UG/RevNRat/backend/user/tests.py                                                        | Python      |          1 |          1 |          2 |          4 |
+| /home/divyanshsinghal/Documents/IITB_UG/RevNRat/backend/user/urls.py                                                         | Python      |          5 |          0 |          2 |          7 |
+| /home/divyanshsinghal/Documents/IITB_UG/RevNRat/backend/user/views.py                                                        | Python      |         23 |          3 |          4 |         30 |
+| /home/divyanshsinghal/Documents/IITB_UG/RevNRat/frontend/README.md                                                           | Markdown    |         38 |          0 |         33 |         71 |
+| /home/divyanshsinghal/Documents/IITB_UG/RevNRat/frontend/build/asset-manifest.json                                           | JSON        |         13 |          0 |          0 |         13 |
+| /home/divyanshsinghal/Documents/IITB_UG/RevNRat/frontend/build/index.html                                                    | Django HTML |          1 |          0 |          0 |          1 |
+| /home/divyanshsinghal/Documents/IITB_UG/RevNRat/frontend/build/manifest.json                                                 | JSON        |          8 |          0 |          1 |          9 |
+| /home/divyanshsinghal/Documents/IITB_UG/RevNRat/frontend/build/static/css/main.c59cc657.css                                  | CSS         |          2 |          5 |          0 |          7 |
+| /home/divyanshsinghal/Documents/IITB_UG/RevNRat/frontend/build/static/js/main.f7bb40af.js                                    | JavaScript  |          1 |          2 |          0 |          3 |
+| /home/divyanshsinghal/Documents/IITB_UG/RevNRat/frontend/package-lock.json                                                   | JSON        |     29,644 |          0 |          1 |     29,645 |
+| /home/divyanshsinghal/Documents/IITB_UG/RevNRat/frontend/package.json                                                        | JSON        |         48 |          0 |          1 |         49 |
+| /home/divyanshsinghal/Documents/IITB_UG/RevNRat/frontend/public/index.html                                                   | Django HTML |         39 |          0 |          4 |         43 |
+| /home/divyanshsinghal/Documents/IITB_UG/RevNRat/frontend/public/manifest.json                                                | JSON        |          8 |          0 |          1 |          9 |
+| /home/divyanshsinghal/Documents/IITB_UG/RevNRat/frontend/src/App.css                                                         | CSS         |          0 |          0 |          2 |          2 |
+| /home/divyanshsinghal/Documents/IITB_UG/RevNRat/frontend/src/App.js                                                          | JavaScript  |         43 |          0 |          6 |         49 |
+| /home/divyanshsinghal/Documents/IITB_UG/RevNRat/frontend/src/components/dashboard.component.js                               | JavaScript  |         15 |          0 |          1 |         16 |
+| /home/divyanshsinghal/Documents/IITB_UG/RevNRat/frontend/src/components/editProfile.component.js                             | JavaScript  |        102 |          0 |          0 |        102 |
+| /home/divyanshsinghal/Documents/IITB_UG/RevNRat/frontend/src/components/login.component.js                                   | JavaScript  |         59 |          0 |          4 |         63 |
+| /home/divyanshsinghal/Documents/IITB_UG/RevNRat/frontend/src/components/navbar.component.js                                  | JavaScript  |         81 |          0 |          3 |         84 |
+| /home/divyanshsinghal/Documents/IITB_UG/RevNRat/frontend/src/components/profile.component.js                                 | JavaScript  |        160 |          0 |          1 |        161 |
+| /home/divyanshsinghal/Documents/IITB_UG/RevNRat/frontend/src/components/signup.component.js                                  | JavaScript  |         82 |          0 |          4 |         86 |
+| /home/divyanshsinghal/Documents/IITB_UG/RevNRat/frontend/src/index.css                                                       | CSS         |          0 |          0 |          1 |          1 |
+| /home/divyanshsinghal/Documents/IITB_UG/RevNRat/frontend/src/index.js                                                        | JavaScript  |         25 |          0 |          6 |         31 |
+| /home/divyanshsinghal/Documents/IITB_UG/RevNRat/frontend/src/store/actions/actionTypes.js                                    | JavaScript  |          4 |          0 |          0 |          4 |
+| /home/divyanshsinghal/Documents/IITB_UG/RevNRat/frontend/src/store/actions/auth.js                                           | JavaScript  |         71 |          0 |          7 |         78 |
+| /home/divyanshsinghal/Documents/IITB_UG/RevNRat/frontend/src/store/reducers/auth.js                                          | JavaScript  |         38 |          0 |          7 |         45 |
+| /home/divyanshsinghal/Documents/IITB_UG/RevNRat/frontend/src/store/utility.js                                                | JavaScript  |          6 |          0 |          0 |          6 |
+| Total                                                                                                                        |             |     30,761 |         80 |        197 |     31,038 |
++------------------------------------------------------------------------------------------------------------------------------+-------------+------------+------------+------------+------------+
