@@ -22,7 +22,6 @@ function Profile(props){
         setSex(res.data.sex);
         setDOB(res.data.dob);
     })
-
     const reviews = new Array(17).fill().map(() => ({
         author: "Username",
         Rating: 3,
