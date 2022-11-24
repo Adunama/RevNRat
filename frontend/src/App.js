@@ -8,6 +8,11 @@ import React from 'react';
 import Profile from './components/profile.component';
 import Dashboard from './components/dashboard.component';
 import EditProfile from './components/editProfile.component';
+import Movie from './components/movie.component';
+import Movies from './components/movies.component';
+import Hotel from './components/hotel.component';
+import Hotels from './components/hotels.component';
+import Restaurant from './components/restaurant.component';
 import { connect } from 'react-redux';
 import * as actions from './store/actions/auth';
 
@@ -22,6 +27,11 @@ class App extends React.Component{
         <NavBar />
         <Routes>
           <Route path="/" element={<Dashboard />}/>
+          <Route path="/restaurants" element={<Restaurant />}/>
+          <Route path="/movies" element={<Movies />}/>
+          <Route exact path="/movies/:movieID" element={<Movie {...this.props} /> }/>
+          <Route path="/hotels" element={<Hotels />}/>
+          <Route exact path="/hotels/:movieID" element={<Hotel {...this.props} /> }/>
           <Route path="/login" element={<Login />}/>
           <Route path="/signup" element={<Signup/>} />
           <Route path="/profile" element={<Profile {...this.props}/>} />

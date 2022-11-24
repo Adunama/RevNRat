@@ -20,7 +20,7 @@ class NavBar extends React.Component{
     }
     render(){
         return(
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
+            <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <div className="container-fluid">
                 <a className="navbar-brand" href="/">RnR</a>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,21 +29,21 @@ class NavBar extends React.Component{
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                     <li className="nav-item">
-                    <a className="nav-link" href="/">Movies</a>
+                    <a className="nav-link" href="/movies">Movies</a>
                     </li>
                     <li className="nav-item">
-                    <a className="nav-link" href="/">Restaurants</a>
+                    <a className="nav-link" href="/restaurants">Restaurants</a>
                     </li>
                     <li className="nav-item">
-                    <a className="nav-link" href="/">Hotels</a>
+                    <a className="nav-link" href="/hotels">Hotels</a>
                     </li>
                 </ul>
-                <form className="d-flex">
+                {/* <form className="d-flex">
                     <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                    <button className="btn btn-outline-success" type="submit" id="search-button-navbar">Search</button>
-                </form>
-                {!this.props.isAuthenticated && <Link to="/login" className=" btn btn-outline-success">Log In</Link>}
-                {!this.props.isAuthenticated && <Link to="/signup" className="btn btn-outline-success">Sign Up</Link>}
+                    <button className="btn btn-outline-light" type="submit" id="search-button-navbar">Search</button>
+                </form> */}
+                {!this.props.isAuthenticated && <Link to="/login" className="btn btn-outline-light me-2">Log In</Link>}
+                {!this.props.isAuthenticated && <Link to="/signup" className="btn btn-outline-light">Sign Up</Link>}
                 {this.props.isAuthenticated &&
                     <div className="nav-item dropdown">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">

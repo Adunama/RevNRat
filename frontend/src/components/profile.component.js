@@ -5,14 +5,22 @@ import InfiniteScroll from "react-infinite-scroller";
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 function Profile(props){
-    const [userName, setUserName] = useState("test");
-    const [email, setEmail] = useState("test@email.com");
-    const [name, setName] = useState("Name");
+    const [userName, setUserName] = useState("");
+    const [email, setEmail] = useState("");
+    const [name, setName] = useState("");
+    const [intro, setIntro] = useState("");
+    const [contact, setContact] = useState();
+    const [sex, setSex] = useState("");
+    const [dob, setDOB] = useState("");
     axios.get(`http://127.0.0.1:8000/user/${props.token}/`)
     .then(res => {
-        setUserName(res.data.username);
+        setUserName(res.data.user.username);
         setName(res.data.fullname);
-        setEmail(res.data.email);
+        setEmail(res.data.user.email);
+        setIntro(res.data.bio);
+        setContact(res.data.contact);
+        setSex(res.data.sex);
+        setDOB(res.data.dob);
     })
 
     const reviews = new Array(17).fill().map(() => ({
@@ -22,21 +30,22 @@ function Profile(props){
         ReviewOf: "Hotel XYZ",
         Review: "Nice Place! uag puqg piueh hf viegh bvojdgh 8erg eqpg ege gouqeg oujab voug oukagv97igb uegvaoeukgvb yhdbtlihbvbi8adyg vl,hdvibyg l,habvlo7eat blae",
     }));
+
     const showRating = (rating) => {
         var items = [];
         for (var i = 0; i < rating; i++) {
             items.push(
-                <div Style="width: fit-content; margin: 0px; padding: 0px"><img src={filled_star} alt="filled star" Style="max-width: 20px; margin: 0px"/></div>
+                <div style={{width: "fit-content", margin: "0px", padding: "0px"}}><img src={filled_star} alt="filled star" style={{maxWidth: "20px", margin: "0px"}}/></div>
             );
         }
         for (var j = 0; j < 5-rating; j++) {
             items.push(
-                <div Style="width: fit-content; margin: 0px; padding: 0px"><img src={empty_star} alt="empty star" Style="max-width: 20px"/></div>
+                <div style={{width: "fit-content", margin: "0px", padding: "0px"}}><img src={empty_star} alt="empty star"style={{maxWidth: "20px", margin: "0px"}}/></div>
             );
         }
         return items;
     }
-    const showItems = (posts) => {
+    const showItems = () => {
         var items = [];
         for (var i = 0; i < records; i++) {
             items.push(
@@ -93,7 +102,7 @@ function Profile(props){
                             <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Hubble_ultra_deep_field.jpg" alt="User" className="rounded-circle" width="150"/>
                             <div className="mt-4">
                                 <h4>{userName}</h4>
-                                <p className="text-secondary mb-1">Intro</p>
+                                <p className="text-secondary mb-1">{intro}</p>
                             </div>
                         </div>
                         </div>
@@ -123,36 +132,36 @@ function Profile(props){
                             <div className="col-sm-3">
                             <h6 className="mb-0">Sex</h6>
                             </div>
-                            <div className="col">  </div>
+                            <div className="col">{sex}</div>
                         </div>
                         <hr />
                         <div className="row align-items-center">
                             <div className="col-sm-3">
                             <h6 className="mb-0">Date Of Birth</h6>
                             </div>
-                            <div className="col">  </div>
+                            <div className="col">{dob}</div>
                         </div>
                         <hr />
                         <div className="row align-items-center">
                             <div className="col-sm-3">
                             <h6 className="mb-0">Contact</h6>
                             </div>
-                            <div className="col"> +91 9999999999 </div>
+                            <div className="col">{contact}</div>
                         </div>
                         </div>
                     </div>
                 </div>
             </div>
             <hr />
-            <h2 Style="text-align: center"> User Reviews </h2>
+            <h2 style={{textAlign: "center"}}> User Reviews </h2>
             <InfiniteScroll
                 pageStart={0}
                 loadMore={loadMore}
                 hasMore={hasMore}
-                loader={<h7 className="loader" Style="text-align: center" key={0}>Loading More Reviews...</h7>}
+                loader={<h6 className="loader" style={{textAlign: "center"}} key={0}>Loading More Reviews...</h6>}
                 useWindow={false}
             >
-                {showItems(reviews)}
+                {showItems()}
             </InfiniteScroll>
         </div>
         </div>
