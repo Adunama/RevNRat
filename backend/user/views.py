@@ -67,6 +67,8 @@ class ProfileView(APIView):
             profile2.save()
             profile2.sex = request.data.get('sex')
             profile2.save()
+            profile2.fullname = request.data.get('fullname')
+            profile2.save()
 
             # return Response(serializer2.data)
             # return JsonResponse(request.data)

@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.http import JsonResponse
+from django.shortcuts import HttpResponse, render
 from itertools import chain
 from .serializers import Movieserializer1
 from rest_framework.views import APIView
@@ -20,7 +21,14 @@ def getdetailsimdb(id):
             break
         except :
             continue
-    identified_movie = Movie(id = id, title = movie['title'], cast = str(movie['cast'][0:5]), directors = str(movie['directors'][0:3]), genre = str(movie['genre']), runningtime = eval(movie['runtimes'][0]), year = movie['year']) 
+    if(movie.get('directors') == None):
+        movie['directors'] = ""
+    if(movie.get('runtimes') == None):
+        runtime = 0
+    else:
+        runtime = eval(movie['runtimes'][0])
+    # identified_movie = Movie(id = id, title = movie['title'], cast = str(movie['cast'][0:5]), genre = str(movie['genre']), year = movie['year']) 
+    identified_movie = Movie(id = id, title = movie['title'], cast = str(movie['cast'][0:5]), directors = str(movie['directors']), genre = str(movie['genre']), runningtime = runtime, year = movie['year']) 
     identified_movie.save()
     return 
 
@@ -29,39 +37,57 @@ def getdetailsimdb(id):
 num_movies_to_be_searched_for = 10
 
 class MoviesView(APIView):
-    def post(request):
-        searchword = request.data['searchword']
+
+    # def get(self,request,*args,**kwargs):
+    #     return HttpResponse("<h1>hello</h1>")
+
+    def post(self,request):
+        print(request.data,"-------------------*******************")
+        searchword = request.data.get('searchword')
+        print("meeee : ", searchword)
         # create an instance of the Cinemagoer class
         ia = Cinemagoer()
         # get a movie
         while True : 
             try : 
+                # print("at it ")
+                # print(searchword)
                 movies = ia.search_movie(searchword)
+                # if len(movies)==0:
+                #     continue
                 break
-            except :
+            except Exception as e:
                 continue
         id_list = []
+        print("movies : ", movies)
         for i in movies[0:num_movies_to_be_searched_for]:
+
             id_list.append(int(i.movieID))
 
         for id in id_list:
             if not Movie.objects.filter(id = id).exists():
                 getdetailsimdb(id)
-
+        print("id_list : ", id_list)
 
         #sorting id_list by rating
         id_list.sort(reverse = True, key = lambda x : Movie.objects.get(id=x).aggrating)
+        id_list = []
+        if len(id_list)==0:
+            return Response({'nomoviefound' : True})
         qs = Movie.objects.filter(id=id_list[0])
         for x in id_list[1:]:
             tempqs = Movie.objects.filter(id=x)
             qs = qs | tempqs
-        serialiser = Movieserializer1(qs)
+        print(qs)
+        print(qs[0])
+        serialiser = Movieserializer1( qs, many=True)
+        # serialiser.is_valid()
+        print(serialiser)
+        # serialiser = Movieserializer1(qs, many=True)
+        print(serialiser.data)
         return Response(serialiser.data)
 
 
-        #TODO
-        
-        #return appropriate jsonrespone containing movies' details
 
 def filter_ids(request):
     ids = request.data['id_list']   #error code : 

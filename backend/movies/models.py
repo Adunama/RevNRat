@@ -14,5 +14,8 @@ class Movie(models.Model):
     runningtime = models.IntegerField(null=True,blank=True) #integer
     year = models.IntegerField(null=True,blank=True) #integer
 
+    def nomoviesfound(self):
+        return False
+
     def __str__(self):
-        return self.title
+        return self.title 
