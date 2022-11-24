@@ -21,6 +21,9 @@ urlpatterns = [
     path('login/', include("login.urls")),
     path('user/', include("user.urls")),
     path('', views.index, name = "index"),
+    path('movies/',include('movies.urls'),name="movies"),
+    path('hotels/',include('hotels.urls'),name="hotels"),
+    path('restaurants/',include('restaurants.urls'),name="restaurants"),
     path('api-auth/', include('rest_framework.urls')),
     path('rest-auth/', include('rest_auth.urls')),
     path('rest-auth/registration/', include('rest_auth.registration.urls'))

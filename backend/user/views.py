@@ -1,8 +1,9 @@
-from django.http import JsonResponse
+from django.http import JsonResponse,HttpResponse
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializers import ProfileSerializer
+from .serializers import ProfileSerializer,UserSerializer,ProfileSerializer2
+from rest_framework.permissions import IsAuthenticated
 from .models import Profile
 from rest_auth.models import TokenModel
 
@@ -10,20 +11,68 @@ from rest_auth.models import TokenModel
 #     def get(self, request, *args, **kwargs)
 #         qs = Profile.objects.get()
 
-def details(request,token):
-    print("reading this")
-    print("reached 1")
-    user1 = TokenModel.objects.get(key=token).user
-    print("reached 2")
-    qs = user1.profile
-    print("reached 3")
-    serialiser = ProfileSerializer(qs)
-    print("reached 4")
-    data = {
-        "username":user1.username,
-        "firstname":user1.first_name,
-        "lastname":user1.last_name,
-        "email":user1.email
-    }
-    return JsonResponse(data)
+# def details(request,token):
+
+
+    
+#     user1 = TokenModel.objects.get(key=token).user
+    
+#     qs = user1.profile
+   
+#     serialiser = ProfileSerializer(qs)
+#     data = {
+#         "username":user1.username,
+#         "firstname":user1.first_name,
+#         "lastname":user1.last_name,
+#         "email":user1.email
+#     }
+#     return JsonResponse(data)
+
+class ProfileView(APIView):
+
+    # permission_classes = {IsAuthenticated, }
+
+    def get(self,request,*args,**kwargs):
+        # print(kwargs['token'] + "-----------------*********************")
+        token = kwargs['token']
+        if TokenModel.objects.filter(key=token).exists():
+            user1 = TokenModel.objects.get(key=token).user
+            profile1 = user1.profile
+            # print(user1,"---------++++++++++++++++++++++++++****************-------------")
+            # print("got here" + "------------------**************-----------")
+            serialiser = ProfileSerializer(profile1)
+            return Response(serialiser.data)
+        return HttpResponse("<h1>Project pe focus kar bhai galat salat dalte hain sale<h1>")
+
+#username,firstname,lastname,email,bio,sex,dob,contact
+#in post not username
+
+    def post(self,request,*args,**kwargs):
+        token = kwargs['token']
+        if TokenModel.objects.filter(key=token).exists():
+            user2 = TokenModel.objects.get(key=token).user
+            profile2 = user2.profile
+            serializer2 = ProfileSerializer2(data=request.data) #Change the serializer
+            # if(serializer2.is_valid()):
+                # serializer2.save()
+            if not serializer2.is_valid():
+                return Response(serializer2.errors)
+
+           
+            profile2.bio = request.data.get('bio')
+            profile2.save()
+            profile2.contact = request.data.get('contact')
+            profile2.save()
+            profile2.dob = request.data.get('dob')
+            profile2.save()
+            profile2.sex = request.data.get('sex')
+            profile2.save()
+
+            # return Response(serializer2.data)
+            # return JsonResponse(request.data)
+            return Response(ProfileSerializer(profile2).data)
+        return HttpResponse("<h1>Badhiya wali gali <h1>")
+
+    
+
         
