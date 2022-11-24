@@ -50,6 +50,9 @@ INSTALLED_APPS = [
 
     'login',
     'user',
+    'movies',
+    'hotels',
+    'restaurants',
 ]
 
 SITE_ID = 1
