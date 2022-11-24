@@ -2,12 +2,24 @@ import React from "react";
 import { Link } from "react-router-dom";
 import axios from 'axios';
 class EditProfile extends React.Component{
-    state = {}
-    componentDidMount(){
+    constructor (props){
+        super(props);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.getUserInfo = this.getUserInfo.bind(this);
+    }
+    state = {
+        username: "",
+        fullname: "",
+        bio: "",
+        contact: "",
+        sex: "",
+        dob: ""
+    }
+    getUserInfo(){
         axios.get(`http://127.0.0.1:8000/user/${this.props.token}/`)
         .then(res => {
             this.setState({
-                username: res.data.username,
+                username: res.data.user.username,
                 fullname: (res.data.fullname),
                 bio: (res.data.bio),
                 contact: (res.data.contact),
@@ -25,8 +37,15 @@ class EditProfile extends React.Component{
             sex: this.state.sex
         })
     }
+    componentDidUpdate(prevProps) {
+        if(prevProps.token !== this.props.token){
+            this.getUserInfo();
+        }
+    }
+    componentDidMount(){
+        this.getUserInfo();
+    }
     render(){
-        console.log(this.state)
         return(
             <div className="container">
             <div className="main-body">
@@ -62,20 +81,37 @@ class EditProfile extends React.Component{
                                     <h6 className="mb-0">Sex</h6>
                                 </div>
                                 <div className="col form-check">
-                                    <input className="form-check-input" type="radio" name="sex" id="sex1" value="Male" onChange={(e) => {this.setState({sex: e.target.value})}}/>
-                                    <label className="form-check-label" for="sex1"> Male </label>
+                                    {this.state.sex==="Male" ? 
+                                        <input className="form-check-input" type="radio" name="sex" id="sex1" value="Male" onChange={(e) => {this.setState({sex: e.target.value})}} defaultChecked/>
+                                        :
+                                        <input className="form-check-input" type="radio" name="sex" id="sex1" value="Male" onChange={(e) => {this.setState({sex: e.target.value})}}/>
+                                    }
+                                    <label className="form-check-label" htmlFor="sex1"> Male </label>
                                 </div>
                                 <div className="col form-check">
-                                    <input className="form-check-input" type="radio" name="sex" id="sex2" value="Female" onChange={(e) => {this.setState({sex: e.target.value})}}/>
-                                    <label className="form-check-label" for="sex2"> Female </label>
+                                    {this.state.sex==="Female" ? 
+                                        <input className="form-check-input" type="radio" name="sex" id="sex2" value="Female" onChange={(e) => {this.setState({sex: e.target.value})}}defaultChecked/>
+                                        :
+                                        <input className="form-check-input" type="radio" name="sex" id="sex2" value="Female" onChange={(e) => {this.setState({sex: e.target.value})}}/>
+                                    }
+                                    <label className="form-check-label" htmlFor="sex2"> Female </label>
                                 </div>
                                 <div className="col form-check">
-                                    <input className="form-check-input" type="radio" name="sex" id="sex3" value="Others" onChange={(e) => {this.setState({sex: e.target.value})}}/>
-                                    <label className="form-check-label" for="sex3"> Others </label>
+                                    {this.state.sex==="Others" ? 
+                                        <input className="form-check-input" type="radio" name="sex" id="sex3" value="Others" onChange={(e) => {this.setState({sex: e.target.value})}} defaultChecked/>
+                                        :
+                                        <input className="form-check-input" type="radio" name="sex" id="sex3" value="Others" onChange={(e) => {this.setState({sex: e.target.value})}}/>
+                                    }
+                                    <label className="form-check-label" htmlFor="sex3"> Others </label>
                                 </div>
                                 <div className="col form-check">
-                                    <input className="form-check-input" type="radio" name="sex" id="sex4" value="Prefer Not to Say" onChange={(e) => {this.setState({sex: e.target.value})}}/>
-                                    <label className="form-check-label" for="sex4"> Prefer Not to Say </label>
+                                    {this.state.sex==="Prefer Not to Say" ? 
+                                        <input className="form-check-input" type="radio" name="sex" id="sex4" value="Prefer Not to Say" onChange={(e) => {this.setState({sex: e.target.value})}} defaultChecked/>
+                                        :
+                                        <input className="form-check-input" type="radio" name="sex" id="sex4" value="Prefer Not to Say" onChange={(e) => {this.setState({sex: e.target.value})}}/>
+                                    }
+                                    
+                                    <label className="form-check-label" htmlFor="sex4"> Prefer Not to Say </label>
                                 </div>
                             </div>
                             <hr />
@@ -93,7 +129,7 @@ class EditProfile extends React.Component{
                                 <h6 className="mb-0">Contact</h6>
                                 </div>
                                 <div className="col col-lg-6">
-                                    <input name="" type="tel" className="form-control" placeholder="Enter Your Phone Number" onChange={(e) => {this.setState({contact: e.target.value})}}/>
+                                    <input name="" type="tel" className="form-control" placeholder="Enter Your Phone Number" onChange={(e) => {this.setState({contact: e.target.value})}} defaultValue={this.state.contact}/>
                                 </div>
                             </div>
                             <hr />
