@@ -10,6 +10,7 @@ class EditProfile extends React.Component{
     state = {
         username: "",
         fullname: "",
+        email: "",
         bio: "",
         contact: "",
         sex: "",
@@ -20,6 +21,7 @@ class EditProfile extends React.Component{
         .then(res => {
             this.setState({
                 username: res.data.user.username,
+                email: res.data.user.email,
                 fullname: (res.data.fullname),
                 bio: (res.data.bio),
                 contact: (res.data.contact),
@@ -73,6 +75,15 @@ class EditProfile extends React.Component{
                                 </div>
                                 <div className="col col-lg-6">
                                     <input name="" type="text" className="form-control" placeholder="Enter Your Name" defaultValue={this.state.fullname} onChange={(e) => {this.setState({fullname: e.target.value})}}/>
+                                </div>
+                            </div>
+                            <hr />
+                            <div className="row align-items-center">
+                                <div className="col-sm-3">
+                                    <h6 className="mb-0">Email</h6>
+                                </div>
+                                <div className="col col-lg-6">
+                                    {this.state.email}
                                 </div>
                             </div>
                             <hr />

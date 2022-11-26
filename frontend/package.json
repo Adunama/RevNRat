@@ -10,7 +10,6 @@
     "bootstrap": "^5.2.2",
     "jquery": "^3.6.1",
     "popper.js": "^1.16.1",
-    "radium": "^0.26.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-infinite-scroller": "^1.2.6",

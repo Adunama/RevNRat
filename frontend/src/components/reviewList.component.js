@@ -1,17 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import filled_star from '../photos/filled_star.png';
 import empty_star from '../photos/empty_star.png';
-import InfiniteScroll from "react-infinite-scroller";
-function ReviewList(){
-    const reviews = new Array(17).fill().map(() => ({
-        author: "Username",
-        Rating: 5,
-        Date: "August 6, 2021",
-        Review: "Nice! uag puqg piueh hf viegh bvojdgh 8erg eqpg ege gouqeg oujab voug oukagv97igb uegvaoeukgvb yhdbtlihbvbi8adyg vl,hdvibyg l,habvlo7eat blae",
-    }));
-    const itemsPerPage = 5;
-    const [hasMore, setHasMore] = useState(true);
-    const [records, setrecords] = useState(0);
+function ReviewList({reviewlist}){
+    const reviews = reviewlist;
     const showRating = (rating) => {
         var items = [];
         for (var i = 0; i < rating; i++) {
@@ -28,18 +19,17 @@ function ReviewList(){
     }
     const showItems = () => {
         var items = [];
-        for (var i = 0; i < records; i++) {
+        for (var i = 0; i < reviews.length; i++) {
             items.push(
                 <div className="row m-2 d-flex justify-content-center">
                     <div>
                         <div className="card shadow">
                             <div className="card-header d-flex justify-content-between">
-                                <div>{reviews[i].author}</div>
-                                <div className='text-muted'>{reviews[i].Date}</div>
+                                <div>{reviews[i].owner.username}</div>
                             </div>
                             <div className="card-body">
-                                <div className="row m-1">{showRating(reviews[i].Rating)}</div>
-                                <p className="m-1">{reviews[i].Review}</p>
+                                <div className="row m-1">{showRating(reviews[i].rating)}</div>
+                                <p className="m-1">{reviews[i].description}</p>
                             </div>
                         </div>
                     </div>
@@ -48,30 +38,9 @@ function ReviewList(){
         }
         return items;
     };
-    const loadMore = () => {
-        if (records === reviews.length) {
-            setHasMore(false);
-        } else if(records + itemsPerPage <= reviews.length){
-            setTimeout(() => {
-            setrecords(records + itemsPerPage);
-            }, 2000);
-        } else {
-            setTimeout(() => {
-            setrecords(reviews.length);
-            }, 2000);
-        }
-    };
     return(
         <div className="container">
-            <InfiniteScroll
-                pageStart={0}
-                loadMore={loadMore}
-                hasMore={hasMore}
-                loader={<h6 className="loader" style={{textAlign: "center"}} key={0}>Loading More Reviews...</h6>}
-                useWindow={false}
-            >
-                {showItems()}
-            </InfiniteScroll>
+            {showItems()}
         </div>
     )
 }

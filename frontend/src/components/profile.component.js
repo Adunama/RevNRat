@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import filled_star from '../photos/filled_star.png';
 import empty_star from '../photos/empty_star.png';
-import InfiniteScroll from "react-infinite-scroller";
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 function Profile(props){
@@ -12,23 +11,21 @@ function Profile(props){
     const [contact, setContact] = useState();
     const [sex, setSex] = useState("");
     const [dob, setDOB] = useState("");
-    axios.get(`http://127.0.0.1:8000/user/${props.token}/`)
-    .then(res => {
-        setUserName(res.data.user.username);
-        setName(res.data.fullname);
-        setEmail(res.data.user.email);
-        setIntro(res.data.bio);
-        setContact(res.data.contact);
-        setSex(res.data.sex);
-        setDOB(res.data.dob);
-    })
-    const reviews = new Array(17).fill().map(() => ({
-        author: "Username",
-        Rating: 3,
-        Date: "August 6, 2021",
-        ReviewOf: "Hotel XYZ",
-        Review: "Nice Place! uag puqg piueh hf viegh bvojdgh 8erg eqpg ege gouqeg oujab voug oukagv97igb uegvaoeukgvb yhdbtlihbvbi8adyg vl,hdvibyg l,habvlo7eat blae",
-    }));
+    const [reviews, setReviews] = useState([]);
+
+    useEffect(()=>{
+        axios.get(`http://127.0.0.1:8000/user/${props.token}/`)
+        .then(res => {
+            setUserName(res.data.user.username);
+            setName(res.data.fullname);
+            setEmail(res.data.user.email);
+            setIntro(res.data.bio);
+            setContact(res.data.contact);
+            setSex(res.data.sex);
+            setDOB(res.data.dob);
+            setReviews(res.data.user.reviewlist);
+        })
+    }, [props.token])
 
     const showRating = (rating) => {
         var items = [];
@@ -46,21 +43,20 @@ function Profile(props){
     }
     const showItems = () => {
         var items = [];
-        for (var i = 0; i < records; i++) {
+        for (var i = 0; i < reviews.length; i++) {
             items.push(
                 <div className="row m-2 d-flex justify-content-center gutters-sm">
                     <div className="col-12 col-md-10 col-lg-8">
                         <div className="card shadow">
                             <div className="card-header d-flex justify-content-between">
                                 <div>{reviews[i].author}</div>
-                                <div className='text-muted'>{reviews[i].Date}</div>
                             </div>
                             <div className="card-body">
-                                <div className="row m-1">{showRating(reviews[i].Rating)}</div>
-                                <p className="m-1">{reviews[i].Review}</p>
+                                <div className="row m-1">{showRating(reviews[i].rating)}</div>
+                                <p className="m-1">{reviews[i].description}</p>
                             </div>
                             <div className="card-footer">
-                                <p>{reviews[i].ReviewOf}</p>
+                                <Link to={`/${reviews[i].placetype}s/${reviews[i].placeid}`}>{reviews[i].placename}</Link>
                             </div>
                         </div>
                     </div>
@@ -68,22 +64,6 @@ function Profile(props){
             );
         }
         return items;
-    };
-    const itemsPerPage = 5;
-    const [hasMore, setHasMore] = useState(true);
-    const [records, setrecords] = useState(0);
-    const loadMore = () => {
-        if (records === reviews.length) {
-            setHasMore(false);
-        } else if(records + itemsPerPage <= reviews.length){
-            setTimeout(() => {
-            setrecords(records + itemsPerPage);
-            }, 2000);
-        } else {
-            setTimeout(() => {
-            setrecords(reviews.length);
-            }, 2000);
-        }
     };
     if(!props.isAuthenticated){
         return(
@@ -153,15 +133,7 @@ function Profile(props){
             </div>
             <hr />
             <h2 style={{textAlign: "center"}}> User Reviews </h2>
-            <InfiniteScroll
-                pageStart={0}
-                loadMore={loadMore}
-                hasMore={hasMore}
-                loader={<h6 className="loader" style={{textAlign: "center"}} key={0}>Loading More Reviews...</h6>}
-                useWindow={false}
-            >
-                {showItems()}
-            </InfiniteScroll>
+            {showItems()}
         </div>
         </div>
     )

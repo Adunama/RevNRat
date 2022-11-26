@@ -36,5 +36,60 @@ class Review(models.Model):
     restaurant = models.ForeignKey("restaurants.Restaurant",on_delete=models.CASCADE,null=True,blank=True)
     movie = models.ForeignKey("movies.Movie",on_delete=models.CASCADE,null=True,blank=True)
 
+    def placetype(self):
+        if(not self.hotel == None):
+            return "hotel"
+        if(not self.restaurant == None):
+            return "restaurant"
+        if(not self.movie == None):
+            return "movie"
+        
+    def placeid(self):
+        if(not self.hotel == None):
+            return self.hotel.id
+        if(not self.restaurant == None):
+            return self.restaurant.id
+        if(not self.movie == None):
+            return self.movie.id
+
+    def placename(self):
+        if(not self.hotel == None):
+            return self.hotel.name
+        if(not self.restaurant == None):
+            return self.restaurant.name
+        if(not self.movie == None):
+            return self.movie.title
+
+
+
+
+    # def save(self, *args, **kwargs):
+    #     new_user = self.author
+    #     if not (self.hotel == None): #check this
+    #         if not (new_user.review_set.objects.get(hotel = self.hotel) == None):
+    #             return
+    #     if not (self.movie == None): #check this
+    #         if new_user.review_set.filter(movie = self.movie).exists() :
+    #             print(new_user.review_set.filter(movie = self.movie))
+    #             return
+    #     if not (self.restaurant== None): #check this
+    #         if(new_user.review_set.objects.get(restaurant = self.restaurant).exists()):
+    #             return
+
+    # #     return super().save(*args, **kwargs)
+    # def validate_unique(self,*args, **kwargs) -> None:
+    #     qs = Review.objects.filter(
+    #         user = self.user,
+    #         hotel = self.hotel,
+    #         movie = self.movie,
+    #         restaurant = self.restaurant
+    #     ).exists
+    #     if qs:
+    #       raise ValidationError('Review already exists')
+    #     return super().validate_unique(*args,**kwargs)
+
+
+    
+
 
 

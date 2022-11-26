@@ -48,7 +48,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
 
-    'login',
     'user',
     'movies',
     'hotels',
@@ -70,8 +69,8 @@ CORS_ORIGIN_WHITELIST = (
 )
 
 MIDDLEWARE = [
-    'django.middleware.common.CommonMiddleware',
     "corsheaders.middleware.CorsMiddleware",
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',

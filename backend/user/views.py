@@ -42,7 +42,6 @@ class ProfileView(APIView):
             # print("got here" + "------------------**************-----------")
             serialiser = ProfileSerializer(profile1)
             return Response(serialiser.data)
-        return HttpResponse("<h1>Project pe focus kar bhai galat salat dalte hain sale<h1>")
 
 #username,firstname,lastname,email,bio,sex,dob,contact
 #in post not username
@@ -73,7 +72,6 @@ class ProfileView(APIView):
             # return Response(serializer2.data)
             # return JsonResponse(request.data)
             return Response(ProfileSerializer(profile2).data)
-        return HttpResponse("<h1>Badhiya wali gali <h1>")
 
     
 
